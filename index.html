@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magia Spațiului - Aranjamente Evenimente</title>
+    <style>
+      /* Reset și bază */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #fffaf3;
+        color: #3a3a3a;
+      }
+
+      /* --- Header parallax --- */
+      header {
+        position: relative;
+        height: 100vh;
+        background: url("/imagini/photo_2_2025-10-22_14-44-25.jpg") center/cover
+          no-repeat;
+        background-attachment: fixed; /* nou - efect de parallax */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+      }
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 0;
+      }
+      header h1 {
+        position: relative;
+        z-index: 1;
+        font-family: "Playfair Display", serif;
+        font-size: 4rem;
+        color: #f8d36b;
+        cursor: pointer;
+        transition: color 0.3s, transform 0.3s;
+        opacity: 0;
+        animation: fadeInHeader 1.5s ease forwards;
+      }
+      header h1:hover {
+        color: #ffe89b;
+        transform: scale(1.05);
+      }
+      header p {
+        position: relative;
+        z-index: 1;
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        color: #fff5d8;
+        opacity: 0;
+        animation: fadeInHeader 1.5s ease 0.5s forwards;
+      }
+
+      @keyframes fadeInHeader {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Navigare */
+      nav {
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 1rem;
+      }
+      nav li {
+        margin: 0 1.5rem;
+      }
+      nav a {
+        text-decoration: none;
+        color: #3a3a3a;
+        font-weight: 600;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #c49b35;
+      }
+
+      /* Secțiuni generale */
+      section {
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: auto;
+      }
+      h2 {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        color: #c49b35;
+        margin-bottom: 2rem;
+      }
+
+      /* About */
+      .about {
+        position: relative;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url("/imagini/photo_2025-10-22_15-25-28.jpg") center/cover no-repeat
+            fixed;
+        padding: 6rem 2rem;
+        border-radius: 15px;
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+      }
+      .about h2,
+      .about p {
+        position: relative;
+        z-index: 1;
+      }
+      .about h2 {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+      }
+      .about p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: auto;
+        line-height: 1.8;
+      }
+
+      /* Servicii */
+      .services ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        list-style: none;
+        padding: 0;
+      }
+      .service-card {
+        background: linear-gradient(145deg, #fff8e6, #fff5d8);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.5s, box-shadow 0.5s, background 0.5s;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.3),
+          transparent 70%
+        );
+        transform: rotate(45deg);
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .service-card:hover::before {
+        opacity: 1;
+      }
+      .service-card:hover {
+        transform: translateY(-20px) scale(1.05);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        background: linear-gradient(145deg, #fff9e9, #fff1c2);
+      }
+      .services .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #c49b35;
+        transition: transform 0.4s, color 0.4s;
+      }
+      .service-card:hover .icon {
+        transform: rotate(15deg) scale(1.3);
+        color: #e0b24b;
+      }
+      .services h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #3a3a3a;
+      }
+      .services p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #5c4a1d;
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .service-card.animate {
+        animation: fadeInUp 0.8s forwards;
+      }
+
+      /* Galerie */
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+      }
+      .gallery img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Pachete */
+      .packages {
+        background-color: #fff8e6;
+        border-radius: 15px;
+        padding: 2rem;
+      }
+      .packages .package {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      /* Testimoniale */
+      .testimonials blockquote {
+        background: #fff;
+        border-left: 5px solid #c49b35;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem auto;
+        max-width: 800px;
+        font-style: italic;
+        color: #4a4a4a;
+      }
+
+      /* Contact */
+      .contact-container {
+        background-color: #fff3e0;
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .contact-info p {
+        font-size: 1.1rem;
+        margin: 0.8rem 0;
+        color: #5c4a1d;
+      }
+      .contact-info strong {
+        color: #c49b35;
+      }
+      .social-links {
+        margin-top: 1.5rem;
+      }
+      .social-links a {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 0.5rem 1rem;
+        background-color: #c49b35;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .social-links a:hover {
+        background-color: #e0b24b;
+        transform: translateY(-3px);
+      }
+
+      /* Footer */
+      footer {
+        background-color: #3a3a3a;
+        color: #fff;
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      footer .socials a {
+        margin: 0 10px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: color 0.3s;
+      }
+      footer .socials a:hover {
+        color: #c49b35;
+      }
+      footer p {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1 id="title">Magia Spațiului</h1>
+      <p>Transformăm orice eveniment într-o poveste memorabilă</p>
+    </header>
+
+    <!-- Navigare -->
+    <nav>
+      <ul>
+        <li><a href="#about">Despre noi</a></li>
+        <li><a href="#services">Servicii</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+        <li><a href="#packages">Pachete</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <h2>Despre noi</h2>
+      <p>
+        Compania <strong>“Magia Spațiului” SRL</strong> oferă servicii
+        profesionale de decor și aranjamente pentru evenimente speciale — nunți,
+        botezuri, aniversări, petreceri corporate și alte momente unice. Ne
+        deplasăm în toată Republica Moldova și în afara țării, aducând
+        rafinament, culoare și stil fiecărui spațiu.
+      </p>
+    </section>
+
+    <!-- Servicii -->
+    <section id="services" class="services">
+      <h2>Serviciile noastre</h2>
+      <ul>
+        <li class="service-card">
+          <div class="icon">🎉</div>
+          <h3>Decor complet</h3>
+          <p>
+            Transformăm orice spațiu cu decor complet pentru evenimente de
+            neuitat.
+          </p>
+        </li>
+        <li class="service-card">
+          <div class="icon">💐</div>
+          <h3>Aranjamente florale</h3>
+          <p>
+            Flori proaspete și aranjamente personalizate care impresionează.
+          </p>
+        </li>
+        <li class="service-card">
+          <div class="icon">🎈</div>
+          <h3>Baloane tematice</h3>
+          <p>
+            Baloane și elemente vizuale potrivite tematicii fiecărui eveniment.
+          </p>
+        </li>
+        <li class="service-card">
+          <div class="icon">🍽️</div>
+          <h3>Decor mese și scaune</h3>
+          <p>Aranjamente elegante pentru mesele și scaunele invitaților.</p>
+        </li>
+        <li class="service-card">
+          <div class="icon">📝</div>
+          <h3>Consultanță tematică</h3>
+          <p>
+            Planificăm și oferim consultanță pentru a crea evenimentul perfect.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Galerie -->
+    <section id="gallery" class="gallery">
+      <h2>Galerie foto</h2>
+      <img
+        src="/imagini/photo_1_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 1"
+      />
+      <img
+        src="/imagini/photo_2025-10-22_15-25-25.jpg"
+        alt="Aranjament eveniment 2"
+      />
+      <img
+        src="/imagini/photo_2025-10-22_15-25-28.jpg"
+        alt="Aranjament eveniment 3"
+      />
+      <img
+        src="/imagini/photo_2025-10-22_15-25-30.jpg"
+        alt="Aranjament eveniment 4"
+      />
+      <img
+        src="/imagini/photo_2_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 5"
+      />
+      <img
+        src="/imagini/photo_3_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 6"
+      />
+      <img
+        src="/imagini/photo_4_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 7"
+      />
+      <img
+        src="/imagini/photo_5_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 8"
+      />
+      <img
+        src="/imagini/photo_6_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 9"
+      />
+      <img
+        src="/imagini/photo_7_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 10"
+      />
+      <img
+        src="/imagini/photo_8_2025-10-22_14-44-25.jpg"
+        alt="Aranjament eveniment 11"
+      />
+    </section>
+
+    <!-- Pachete -->
+    <section id="packages" class="packages">
+      <h2>Pachete personalizate</h2>
+      <div class="package">
+        <h3>Pachet Elegant</h3>
+        <p>
+          Decor floral, baloane tematice și aranjamente de masă pentru până la
+          50 de invitați.
+        </p>
+      </div>
+      <div class="package">
+        <h3>Pachet Premium</h3>
+        <p>
+          Design complet al evenimentului, decor personalizat, consultanță și
+          transport gratuit.
+        </p>
+      </div>
+      <div class="package">
+        <h3>Pachet Deluxe</h3>
+        <p>
+          Experiență de lux cu tematică unică, aranjamente exclusive, efecte
+          speciale și flori naturale.
+        </p>
+      </div>
+    </section>
+
+    <!-- Testimoniale -->
+    <section id="testimonials" class="testimonials">
+      <h2>Ce spun clienții noștri</h2>
+      <blockquote>
+        “Un decor absolut superb! Mulțumim echipei Magia Spațiului pentru
+        atenția la detalii.” – Maria & Ion
+      </blockquote>
+      <blockquote>
+        “Evenimentul nostru a fost transformat într-o adevărată poveste.
+        Recomand cu încredere!” – Andreea
+      </blockquote>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <h2>Contactează-ne</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <p>📞 <strong>Telefon:</strong> +373 60942429</p>
+          <p>📧 <strong>Email:</strong> MagiaSpatiului@gmail.com</p>
+          <p>
+            📍 <strong>Locație:</strong> Sediul: orașul Hîncești, strada 31
+            August 1989
+          </p>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/">Instagram</a>
+          <a href="https://www.facebook.com/">Facebook</a>
+          <a href="https://www.tiktok.com/en/">TikTok</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+      <p>
+        Compania “Magia Spațiului” SRL<br />
+        Sediul: orașul Hîncești, strada 31 August 1989<br />
+        Cod fiscal: 100060345333123 | Data înregistrării: 15.03.2025<br />
+        Beneficiar efectiv: Bagrin Irina
+      </p>
+      <p>
+        &copy; 2025 Magia Spațiului. Toate drepturile rezervate. Șefa: Bagrin
+        Irina
+      </p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+      // Parallax activ doar când secțiunea "Despre noi" e vizibilă
+      const aboutSection = document.querySelector(".about");
+      let aboutActive = false;
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            aboutActive = entry.isIntersecting;
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(aboutSection);
+
+      window.addEventListener("scroll", () => {
+        if (aboutActive) {
+          const offset = window.scrollY * 0.4;
+          aboutSection.style.backgroundPositionY = `${offset}px`;
+        }
+      });
+
+      // Scroll lin la "Despre noi" când se apasă titlul
+      document.getElementById("title").addEventListener("click", () => {
+        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+      });
+
+      // Animații pentru serviciile la scroll
+      const cards = document.querySelectorAll(".service-card");
+      const serviceObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate");
+              serviceObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      cards.forEach((card) => serviceObserver.observe(card));
+    </script>
+  </body>
+</html>
